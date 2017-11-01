@@ -4,21 +4,18 @@ import { FETCH_FRIENDS, ADD_FRIEND } from './types';
 const serverURL = 'http://localhost:5000';
 
 export const fetchFriends = () => {
-    const friends = axios.get(`${serverURL}/friends`);
+    const promise = axios.get(`${serverURL}/friends`);
+    console.log(promise);
     return {
         type: FETCH_FRIENDS,
-        payload: {
-            friends
-        }
+        payload: promise
     }
 }
 
 export const addFriend = (friend) => {
-    const friends = axiox.post(`${serverURL}/new-friend`, friend);
+    const promise = axios.post(`${serverURL}/new-friend`, friend);
     return {
         type: ADD_FRIEND,
-        payload: {
-            friends
-        }
+        payload: promise
     }
 }
