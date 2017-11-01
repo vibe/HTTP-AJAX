@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchFriends, addFriend } from '../actions/index';
+import FriendsForm from './friendForm';
+import Friends from '../components/friends';
+
+import { fetchFriends, addFriend, removeFriend } from '../actions/index';
 
 class FriendsApp extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+        }
     }
     componentDidMount() {
-        console.log(this.props.fetchFriends());
+        this.props.fetchFriends()
     }
     render() {
         return (
             <div className="friends">
-                friends
+                <FriendsForm onSubmit={this.props.addFriend}/>
+                <Friends friends={this.props.friends} removeFriend={this.props.removeFriend}/>
             </div>
         )
     }
@@ -25,7 +31,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFriends: () => dispatch(fetchFriends()),
-        addFriend: () => dispatch(addFriend())
+        addFriend: (friend) => dispatch(addFriend(friend)),
+        removeFriend: (id) => dispatch(removeFriend(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsApp);

@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { FETCH_FRIENDS, ADD_FRIEND } from './types';
+import { FETCH_FRIENDS, ADD_FRIEND, REMOVE_FRIEND } from './types';
 
 const serverURL = 'http://localhost:5000';
 
 export const fetchFriends = () => {
     const promise = axios.get(`${serverURL}/friends`);
-    console.log(promise);
     return {
         type: FETCH_FRIENDS,
         payload: promise
@@ -13,9 +12,19 @@ export const fetchFriends = () => {
 }
 
 export const addFriend = (friend) => {
+    console.log(friend);
     const promise = axios.post(`${serverURL}/new-friend`, friend);
     return {
         type: ADD_FRIEND,
+        payload: promise
+    }
+}
+
+export const removeFriend = (id) => {
+    console.log(id);
+    const promise = axios.delete(`${serverURL}/delete-friend`, { index: id});
+    return {
+        type: REMOVE_FRIEND,
         payload: promise
     }
 }
