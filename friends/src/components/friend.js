@@ -13,8 +13,12 @@ export default class Friend extends Component {
             editing: !this.state.editing
         })
     }
+    updateFriend = (friend) => {
+        this.props.updateFriend(friend);
+        this.toggleEdit();
+    }
     render() {
-        const {name, age, email, removeFriend, editFriend} = this.props;
+        const {name, age, email, removeFriend} = this.props;
         const { editing } = this.state;
         return (
             <li>
@@ -24,7 +28,7 @@ export default class Friend extends Component {
                     <span className="email">{email}</span>
                     <button onClick={removeFriend}>remove</button>
                     <button onClick={this.toggleEdit}>Edit</button>
-        </div> : <FriendForm/> }
+        </div> : <FriendForm type="update" onSubmit={this.updateFriend} name={name} age={age} email={email} cancel={this.toggleEdit}/> }
             </li>
         )
     }

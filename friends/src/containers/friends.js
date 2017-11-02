@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import FriendsForm from './friendForm';
 import Friends from '../components/friends';
 
-import { fetchFriends, addFriend, removeFriend } from '../actions/index';
+import { fetchFriends, addFriend, removeFriend, updateFriend } from '../actions/index';
 
 class FriendsApp extends Component {
     constructor(props) {
@@ -17,8 +17,8 @@ class FriendsApp extends Component {
     render() {
         return (
             <div className="friends">
-                <FriendsForm onSubmit={this.props.addFriend}/>
-                <Friends friends={this.props.friends} removeFriend={this.props.removeFriend}/>
+                <FriendsForm type="add" onSubmit={this.props.addFriend}/>
+                <Friends friends={this.props.friends} removeFriend={this.props.removeFriend} updateFriend={this.props.updateFriend}/>
             </div>
         )
     }
@@ -32,7 +32,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchFriends: () => dispatch(fetchFriends()),
         addFriend: (friend) => dispatch(addFriend(friend)),
-        removeFriend: (id) => dispatch(removeFriend(id))
+        removeFriend: (id) => dispatch(removeFriend(id)),
+        updateFriend: (friend) => dispatch(updateFriend(friend))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsApp);

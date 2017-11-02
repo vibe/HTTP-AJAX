@@ -25,13 +25,15 @@ class FriendForm extends Component {
         }
     }
     render() {
+        const { type = 'add', cancel=()=>{} } = this.props;
         return (
-            <div className="friend-form">
+            <div className={`friend-form-${type}`}>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" placeholder="name" value={this.state.name} onChange={(e) => this.handleChange(e, 'name')} required={true} />
                     <input type="number" placeholder="age" value={this.state.age} onChange={(e) => this.handleChange(e, 'age')} required={true} />
                     <input type="email" placeholder="email" value={this.state.email} onChange={(e) => this.handleChange(e, 'email')} required={true} />
-                    <button type="submit">Add Friend</button>
+                    <button type="submit">{type === 'update' ? 'Update' : 'Add'} Friend</button>
+                    { type === 'update' ? <button type="button" onClick={cancel}>cancel</button> : null }
                 </form>
             </div>
         )

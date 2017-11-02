@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_FRIENDS, ADD_FRIEND, REMOVE_FRIEND } from './types';
+import { FETCH_FRIENDS, ADD_FRIEND, REMOVE_FRIEND, UPDATE_FRIEND } from './types';
 
 const serverURL = 'http://localhost:5000';
 
@@ -25,6 +25,14 @@ export const removeFriend = (id) => {
     const promise = axios.delete(`${serverURL}/delete-friend`, { index: id});
     return {
         type: REMOVE_FRIEND,
+        payload: promise
+    }
+}
+
+export const updateFriend = (friend) => {
+    const promise  = axios.put(`${serverURL}/update-friend`, friend);
+    return {
+        type: UPDATE_FRIEND,
         payload: promise
     }
 }
