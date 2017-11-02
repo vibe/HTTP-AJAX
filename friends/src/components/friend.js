@@ -15,7 +15,14 @@ export default class Friend extends Component {
     }
     updateFriend = (friend) => {
         this.props.updateFriend(friend);
-        this.toggleEdit();
+    }
+    componentWillReceiveProps(props) {
+        const {name, age, email} = this.props;
+        if(name !== this.state.name || age !== this.state.age || email !== this.state.email) {
+            this.setState({
+                editing: false
+            })
+        }
     }
     render() {
         const {name, age, email, removeFriend} = this.props;
@@ -34,14 +41,3 @@ export default class Friend extends Component {
     }
 }
 
-
-// export default ({name, age, email, removeFriend, editFriend}) => {
-//     const test = true;
-//     return test ? (
-//         <li>
-//             <span className="name">{name}</span>
-//             <span className="age">{age}</span>
-//             <span className="email">{email}</span>
-//             <button onClick={removeFriend}>remove</button>
-//             <button onClick={(e)}>Edit</button>
-//         </li>
