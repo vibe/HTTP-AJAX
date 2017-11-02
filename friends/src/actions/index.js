@@ -22,7 +22,9 @@ export const addFriend = (friend) => {
 
 export const removeFriend = (id) => {
     console.log(id);
-    const promise = axios.delete(`${serverURL}/delete-friend`, { index: id});
+    const promise = axios.delete(`${serverURL}/delete-friend`, { params: {
+        index: id
+    }});
     return {
         type: REMOVE_FRIEND,
         payload: promise
